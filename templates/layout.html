@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../static/chatbot.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% block styles %}{% endblock %}
-    {% block script %}{% endblock %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
@@ -19,7 +18,7 @@
         <i class="fa fa-comments-o""></i>
         <script>
             $(function() {
-                var INDEX = 0;
+                var INDEX = 1;
                 $("#chat-submit").click(function(e) {
                     e.preventDefault();
                     var msg = $("#chat-input").val();
@@ -79,7 +78,10 @@
                 <div class="chat-box-overlay">
                 </div>
                 <div class="chat-logs">
-
+                    <div id="cm-msg-1" class="chat-msg user " style=""> <span class="msg-avatar"> <img
+                                src="/static/img/bot.jpg"> </span>
+                        <div class=" cm-msg-text">How are you today?</div>
+                    </div>
                 </div>
             </div>
             <div class="chat-input">
@@ -92,7 +94,5 @@
             </div>
     </div>
 </body>
-
-{% block scriptbottom %}{% endblock %}
 
 </html>

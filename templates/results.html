@@ -1,7 +1,52 @@
-{% extends layout.html %}
-
-{% block title} Results - name {% endblock %}
+{% extends 'layout.html' %}
+<!-- return render_template('results.html', vo2_message = vo2_results['message'], vo2_exercise =
+vo2_results['exercises'], vo2_recs = vo2_results['recs'], vo2_link = vo2_results['link'], vo2_risk =
+vo2_results['risk'],treadmill_message = treadmill_results['message'], treadmill_exercise =
+treadmill_results['exercises'], treadmill_link = treadmill_results['link']) -->
+{% block title %} Results - name {% endblock %}
 {% block styles %}
 <link rel="stylesheet" href="../static/results.css"> {% endblock %}
 {% block body %}
+<div class="flip-card">
+    <div id="card" class="flip-card-inner">
+        <div class="flip-card-front">
+            <h1>Your VO<sup>2</sup> analysis</h1>
+            <h2>{{ vo2_message }} </h2>
+            <h2>Here are some exercises for you:</h2>
+            {% for exercise in vo2_exercise %}
+            <ul>
+                <li>{{ exercise }}</li>
+            </ul>
+            {% endfor %}
+            {% if vo2_recs %}
+            <h2>Here are some recommendations we have for you:</h2>
+            {% for rec in vo2_recs %}
+            {{ rec }}
+            {% endfor %}
+            {% endif %}
+            <h3>You are at risk of {{ vo2_risk }}</h3>
+            <h3>Here is a <a href="{{ vo2_link }}">link</a> for more information.</h3>
+            <p>Sources:</p>
+            <a href="https://link.springer.com/referenceworkentry/10.1007%2F978-3-319-10152-1_20-1">1</a>
+            <a href="https://lsda.jsc.nasa.gov/Dataset/dataset_detail_result/178066__3140114984">2</a>
+            <p class="footer">Click to view your calf muscle analysis!</p>
+        </div>
+        <div class="flip-card-back">
+            <h1>Your muscle volume analysis</h1>
+            <h2>{{ treadmill_message }} </h2>
+            <h2>Here are some exercises for you:</h2>
+            <p>{{ treadmill_exercise }}</p>
+            <h3>Here is a <a href="{{ treadmill_link }}">link</a> for more information.</h3>
+            <p>Sources:</p>
+            <a href="https://www.nasa.gov/mission_pages/station/research/station-science-101/bone-muscle-loss-in-microgravity">1</a>
+            <p class="footer">Click to view your VO<sup>2</sup> analysis!</p>
+        </div>
+    </div>
+    <script>
+        $('#card').click(function() {
+            $(this).toggleClass('flip-card-inner');
+            $(this).toggleClass('flip-card-inner-flipped');
+        });
+    </script>
+</div>
 {% endblock %}

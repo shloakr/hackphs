@@ -4,4 +4,15 @@
 {% block styles %}
 <link rel="stylesheet" href="../static/assess.css"> {% endblock %}
 {% block body %}
+
+<form class="form" action="/assess", method="POST">
+    <input type="number" name="calf" placeholder="Enter your calf muscle volume (cm3)" required>
+    <input type="number" name="vo2" placeholder="Enter your VO2 (mL/kg/min)" required>
+    <a href="https://www.healthline.com/health/vo2-max">What is VO2?</a>
+    <input type="submit" class="submit-topic" value="Submit!">
+</form>
+{% endblock %}
+
+
+{% block scripts %}
 {% endblock %}
