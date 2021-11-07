@@ -122,7 +122,7 @@ def get():
 def respond(message):
     response = MessagingResponse()
     response.message(message)
-    return str('response')
+    return str(response)
 
 @app.route('/message', methods=['POST'])
 def reply():
