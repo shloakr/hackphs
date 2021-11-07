@@ -6,12 +6,15 @@ from twilio.twiml.messaging_response import MessagingResponse
 import pickle
 import openai
 
-openai.api_key = ''
+load_dotenv()
+
+api_key = os.environ.get('OPEN_AI_KEY')
+
+openai.api_key = api_key
 completion = openai.Completion()
 
 app = Flask(__name__, static_url_path='/static')
 
-load_dotenv()
 
 # ML
 def heartrate(VO2):
