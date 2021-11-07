@@ -19,11 +19,15 @@ def assess():
     else:
         return render_template("search.html")
 
-@app.route('/chatbot')
-def bot():
-    if request.method == "POST":
-        output = chatbot(input)
-    return render_template('Table/Table.html')
+def chatbot(msg):
+    # Filler
+    return msg
+
+@app.route('/get', methods=["POST"])
+def get():
+    msg = request.form['input']
+    data = chatbot(msg)
+    return data
 
 if __name__ == "__main__":
     app.run(debug = True)
