@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 import pickle
 import openai
 
-openai.api_key = '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'
+openai.api_key = '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'
 completion = openai.Completion()
 
 app = Flask(__name__, static_url_path='/static')
