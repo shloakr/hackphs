@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template
+import os
+from twilio.twiml.messaging_response import MessagingResponse
 import pickle
 import openai
 
@@ -84,6 +86,22 @@ def final_function(user_input):
 def chatbot(msg):
     return final_function(msg)
 
+# Twilio
+# I swear I'll never hardcode credentials irl but we're running out of time
+account_sid = 'AC822a5d64e84c2466bd10b6e9843dfb99'
+auth_token = '592b8817f3054fb52d097415f2adeaf7'
+client = Client(account_sid, auth_token)
+
+message = client.messages \
+                .create(
+                     body="Join Earth's mightiest heroes. Like Kevin Bacon.",
+                     from_='+19282604891',
+                     to='+6598218198'
+                 )
+
+print(message.sid)
+
+
 # Flask app
 @app.route('/')
 def index():
@@ -107,4 +125,15 @@ def get():
     msg = request.form['input']
     data = chatbot(msg)
     return data
-    
+
+# Twilio
+def respond(message):
+    response = MessagingResponse()
+    response.message(message)
+    return str(response)
+
+@app.route('/message', methods=['POST'])
+def reply():
+    message = request.form.get('Body').lower()
+    if message:
+        return respond(chatbot(message))
