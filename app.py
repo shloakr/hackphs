@@ -132,3 +132,6 @@ def reply():
     message = request.form.get('Body').lower()
     if message:
         return respond(chatbot(message))
+
+if __name__ == "__main__":
+    app.run()
