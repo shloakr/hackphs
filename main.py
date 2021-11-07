@@ -107,6 +107,4 @@ def get():
     msg = request.form['input']
     data = chatbot(msg)
     return data
-
-if __name__ == "__main__":
-    app.run(debug = True)
+    
