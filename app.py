@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template
 import os
+from dotenv import load_dotenv
+from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 import pickle
 import openai
@@ -8,6 +10,8 @@ openai.api_key = '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'
 completion = openai.Completion()
 
 app = Flask(__name__, static_url_path='/static')
+
+load_dotenv()
 
 # ML
 def heartrate(VO2):
@@ -86,21 +90,9 @@ def final_function(user_input):
 def chatbot(msg):
     return final_function(msg)
 
-# Twilio
-# I swear I'll never hardcode credentials irl but we're running out of time
-account_sid = 'AC822a5d64e84c2466bd10b6e9843dfb99'
-auth_token = '592b8817f3054fb52d097415f2adeaf7'
+account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
+auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
 client = Client(account_sid, auth_token)
-
-message = client.messages \
-                .create(
-                     body="Join Earth's mightiest heroes. Like Kevin Bacon.",
-                     from_='+19282604891',
-                     to='+6598218198'
-                 )
-
-print(message.sid)
-
 
 # Flask app
 @app.route('/')
