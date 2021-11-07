@@ -6,7 +6,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 import pickle
 import openai
 
-openai.api_key = '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'
+openai.api_key = ''
 completion = openai.Completion()
 
 app = Flask(__name__, static_url_path='/static')
@@ -122,7 +122,7 @@ def get():
 def respond(message):
     response = MessagingResponse()
     response.message(message)
-    return str(response)
+    return str('response')
 
 @app.route('/message', methods=['POST'])
 def reply():
